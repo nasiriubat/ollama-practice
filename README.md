@@ -1,5 +1,3 @@
-
-```markdown
 # ChatGPT-like Interface with Multiple Models
 
 This project is a ChatGPT-like interface built using HTML, JavaScript, and a backend API. Users can interact with different language models via a simple interface where they can type in a prompt and receive responses from the selected model. The project supports multiple language models and includes an "All" option that allows querying all available models simultaneously.
