@@ -1,0 +1,142 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+#chat-container {
+    width: 60%;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Adjust the height for better scrollability */
+}
+
+#model-selection {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#model-selection label {
+    font-size: 25px;
+}
+
+#model-selection select {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px !important;
+}
+
+/* Chat Box Area */
+#chat-box {
+    background-color: #f5f5f5;
+    flex-grow: 1;
+    overflow-y: auto; /* Scrollable chat box */
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%; /* Make chat-box occupy the full width */
+}
+
+/* Hide scrollbar */
+#chat-box::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.chat-message {
+    background-color: #45a049;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 70%;
+    word-wrap: break-word;
+    font-size: 20px;
+}
+
+.user-message {
+    background-color: #e1ffc7;    
+    margin-left: auto;
+    text-align: right;
+}
+
+.bot-message {
+    background-color: #d9d9d9;
+    margin-right: auto;
+}
+
+#input-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+#prompt-input {
+    flex: 4;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#send-btn {
+    flex: 1;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#send-btn:hover {
+    background-color: #45a049;
+}
+
+/* Loading Dots */
+.loading-dots {
+    display: inline-block;
+    font-size: 30px;
+}
+
+.loading-dots span {
+    padding: 10px;
+    display: inline-block;
+    animation: blink 1.4s infinite both;
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    #chat-container {
+        width: 90%;
+    }
+}
+
