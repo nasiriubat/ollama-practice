@@ -1,17 +1,20 @@
 {
-  "name": "tinyllama",
+  "name": "tuni-llama",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
     "ollama": "^0.5.9"
   }
 }

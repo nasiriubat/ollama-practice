@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT-like Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        #chat-container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #model-selection {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #model-selection select {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .user-message {
+            background-color: #e1ffc7;
+            text-align: right;
+        }
+
+        .bot-message {
+            background-color: #d9d9d9;
+        }
+
+        #input-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        #prompt-input {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        #send-btn {
+            width: 18%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #send-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="chat-container">
+        <!-- Model Selection Dropdown -->
+        <div id="model-selection">
+            <label for="model">Select Model:</label>
+            <select id="model">
+                <option value="llama3.1:latest">LLaMA 3.1</option>
+                <option value="llama2:latest">LLaMA 2</option>
+                <option value="llama2-uncensored:latest">LLaMA 2 Uncensored</option>
+                <option value="mistral:latest">Mistral</option>
+            </select>
+        </div>
+
+        <!-- Chat Box -->
+        <div id="chat-box"></div>
+
+        <!-- Input Container -->
+        <div id="input-container">
+            <input type="text" id="prompt-input" placeholder="Type a message..." />
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('send-btn').addEventListener('click', async () => {
+            const prompt = document.getElementById('prompt-input').value;
+            const model = document.getElementById('model').value;  // Get the selected model
+
+            // Display user input in the chat box
+            if (prompt.trim() !== '') {
+                appendMessage(prompt, 'user','User');
+                document.getElementById('prompt-input').value = '';
+
+                // Send user input and selected model to the server
+                try {
+                    const response = await fetch('/api/query', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ prompt, model }),  // Send both prompt and model
+                    });
+                    const data = await response.json();
+
+                    // Display the server response in the chat box
+                    appendMessage(data.response, 'bot',model);
+                } catch (error) {
+                    appendMessage('Error fetching response from the server.', 'bot');
+                    console.error('Error:', error);
+                }
+            }
+        });
+
+        function appendMessage(message, sender,model) {
+            const chatBox = document.getElementById('chat-box');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('chat-message');
+            messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageElement.innerHTML = '<b>'+model+' :</b> '+message.replace(/\n/g, '<br>');  // Preserve line breaks in the response
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight;  // Scroll to the bottom after new message
+        }
+    </script>
+
+</body>
+</html>

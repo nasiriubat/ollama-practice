@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT-like Interface</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link the external CSS file -->
+</head>
+<body>
+
+    <div id="chat-container">
+        <!-- Model Selection Dropdown -->
+        <div id="model-selection">
+            <label>TUNI LLMs</label>
+            <select id="model">
+                <option value="llama3.1:latest">LLaMA 3.1</option>
+                <option value="llama2:latest">LLaMA 2</option>
+                <option value="llama2-uncensored:latest">LLaMA 2 Uncensored</option>
+                <option value="mistral:latest">Mistral</option>
+                <option value="all">All</option> <!-- Add "All" option -->
+            </select>
+        </div>
+
+        <!-- Chat Box for Single Response -->
+        <div id="chat-box"></div>
+
+        <!-- Input Container -->
+        <div id="input-container">
+            <input type="text" id="prompt-input" placeholder="Type a message..." />
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Link the external JavaScript file -->
+
+</body>
+</html>
